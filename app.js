@@ -30,13 +30,9 @@
       ShoppingListService.removeAndaddToBoughtItems(itemIndex);
       list.toBuyItems = ShoppingListService.getToBuyItems();
       list.boughtItems = ShoppingListService.getBoughtItems();
-      if (list.boughtItems.length <= 0){
-        list.errorMessage2 = "Nothing bought yet.";
-      } else {
-          list.errorMessage2  = "";
-      }
+      list.errorMessage2  = "";
       if (list.toBuyItems.length <= 0){
-        list.errorMessage1 = "Everything bought";
+        list.errorMessage1 = "Everything is bought!";
       }
     };
   }
