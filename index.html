@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" ng-app='ShoppingListApp'>
+<html lang="en" ng-app='ShoppingListCheckOff'>
   <head>
     <title>Shopping List Check Off</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,28 +25,28 @@
     </style>
   </head>
 <body>
-  <div  id="list" ng-controller='ShoppingListController as list' class="container">
+  <div  class="container">
   <h1>Shopping List Check Off</h1>
 
   <div class="row">
 
     <!-- To Buy List -->
-    <div class="col-md-6">
+    <div class="col-md-6" id="toBuyList" ng-controller='ToBuyController as toBuyList' >
      <h2>To Buy:</h2>
      <ul>
-       <li ng-repeat="item in list.toBuyItems">
-         Buy {{ item.quantity }} {{ item.name }}(s) <button class="btn btn-default" ng-click="list.removeAndaddToBoughtItems($index)"><span class="glyphicon glyphicon-ok"></span> Bought</button></li>
+       <li ng-repeat="item in toBuyList.toBuyItems">
+         Buy {{ item.quantity }} {{ item.name }}(s) <button class="btn btn-default" ng-click="toBuyList.removeAndaddToBoughtItems($index)"><span class="glyphicon glyphicon-ok"></span> Bought</button></li>
      </ul>
-     <div class="emptyMessage" ng-if="list.errorMessage1">{{list.errorMessage1}}</div>
+     <div class="emptyMessage" ng-if="toBuyList.errorMessage1">{{toBuyList.errorMessage1}}</div>
     </div>
 
     <!-- Already Bought List -->
-    <div class="col-md-6">
+    <div class="col-md-6" id="boughtList" ng-controller='AlreadyBoughtController as boughtList'>
      <h2>Already Bought:</h2>
      <ul>
-       <li ng-repeat="item in list.boughtItems">Bought {{ item.quantity }} {{ item.name }}(s)</li>
+       <li ng-repeat="item in boughtList.boughtItems">Bought {{ item.quantity }} {{ item.name }}(s)</li>
      </ul>
-     <div class="emptyMessage" ng-if="list.errorMessage2">{{list.errorMessage2}}</div>
+     <div class="emptyMessage" ng-if="boughtList.boughtItems==0">Nothing bought yet.</div>
     </div>
   </div>
 </div>

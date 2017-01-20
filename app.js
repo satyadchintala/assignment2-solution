@@ -1,8 +1,9 @@
 (function () {
   'use strict';
 
-  angular.module('ShoppingListApp', [])
-  .controller('ShoppingListController', ShoppingListController)
+  angular.module('ShoppingListCheckOff', [])
+  .controller('ToBuyController', ToBuyController)
+  .controller('AlreadyBoughtController', AlreadyBoughtController)
   .provider('ShoppingListService', ShoppingListServiceProvider)
   .config(Config);
 
@@ -16,25 +17,23 @@
                                                      {name: "ranch bottle", quantity: 1}];
   }
 
-  ShoppingListController.$inject = ['ShoppingListService'];
-  function ShoppingListController(ShoppingListService) {
-    var list = this;
-
-    list.toBuyItems = ShoppingListService.getToBuyItems();
-    list.boughtItems = ShoppingListService.getBoughtItems();
-
-    if (list.boughtItems.length <= 0){
-      list.errorMessage2 = "Nothing bought yet.";
-    }
-    list.removeAndaddToBoughtItems = function (itemIndex) {
+  ToBuyController.$inject = ['ShoppingListService'];
+  function ToBuyController(ShoppingListService) {
+    var toBuyList = this;
+    toBuyList.toBuyItems = ShoppingListService.getToBuyItems();
+    toBuyList.removeAndaddToBoughtItems = function (itemIndex) {
       ShoppingListService.removeAndaddToBoughtItems(itemIndex);
-      list.toBuyItems = ShoppingListService.getToBuyItems();
-      list.boughtItems = ShoppingListService.getBoughtItems();
-      list.errorMessage2  = "";
-      if (list.toBuyItems.length <= 0){
-        list.errorMessage1 = "Everything is bought!";
+      toBuyList.toBuyItems = ShoppingListService.getToBuyItems();
+      if (toBuyList.toBuyItems.length <= 0){
+        toBuyList.errorMessage1 = "Everything is bought!";
       }
     };
+  }
+
+  AlreadyBoughtController.$inject = ['ShoppingListService'];
+  function AlreadyBoughtController(ShoppingListService) {
+    var boughtList = this;
+    boughtList.boughtItems = ShoppingListService.getBoughtItems();
   }
 
 
