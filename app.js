@@ -29,6 +29,7 @@
       }
     };
   }
+  
 
   AlreadyBoughtController.$inject = ['ShoppingListService'];
   function AlreadyBoughtController(ShoppingListService) {
